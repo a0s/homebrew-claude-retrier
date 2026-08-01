@@ -16,8 +16,8 @@ class ClaudeRetrier < Formula
     # the system python3 on macOS (Xcode CLT, may be absent) and whatever is on
     # PATH elsewhere; neither is the one this formula just guaranteed.
     inreplace "claude-retrier.sh",
-              'CR_PYTHON_CANDIDATES:=python3:',
-              "CR_PYTHON_CANDIDATES:=#{Formula["python@3.13"].opt_bin}/python3:python3:"
+              "CR_PYTHON_CANDIDATES:=python3:",
+              "CR_PYTHON_CANDIDATES:=#{formula_opt_bin("python@3.13")}/python3.13:python3:"
 
     bin.install "claude-retrier.sh" => "claude-retrier"
   end
@@ -49,7 +49,7 @@ class ClaudeRetrier < Formula
     # formula pinned — an inreplace typo would otherwise only show up in a real
     # session, at the moment a limit is hit.
     (testpath/"supervisor.py").write(shell_output("#{bin}/claude-retrier --cr-dump-python"))
-    system Formula["python@3.13"].opt_bin/"python3", "-c",
+    system formula_opt_bin("python@3.13")/"python3.13", "-c",
            "import py_compile,sys; py_compile.compile(sys.argv[1], doraise=True)",
            testpath/"supervisor.py"
 
