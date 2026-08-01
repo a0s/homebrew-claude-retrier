@@ -11,8 +11,8 @@ Then run your session through it instead of calling claude directly:
 
 ```sh
 claude-retrier                                 # plain `claude`
-claude-retrier --cr-cmd claude-work            # your own binary, alias or function
-claude-retrier --cr-cmd 'claude --model opus'  # a whole command line
+claude-retrier --cmd claude-work               # your own binary, alias or function
+claude-retrier --cmd 'claude --model opus'     # a whole command line
 ```
 
 Latest from `main` instead of the released tag:

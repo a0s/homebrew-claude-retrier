@@ -1,8 +1,8 @@
 class ClaudeRetrier < Formula
   desc "Auto-resume Claude Code after a usage limit, on a pty, without tmux"
   homepage "https://github.com/a0s/claude-retrier"
-  url "https://github.com/a0s/claude-retrier/archive/refs/tags/v1.0.0.tar.gz"
-  sha256 "766828ce870c73e180b050da64c1abf7e8bf88e77f099909e694b34bb49e48a9"
+  url "https://github.com/a0s/claude-retrier/archive/refs/tags/v1.1.0.tar.gz"
+  sha256 "b1654133cd72b339d32ef9322ec8d4b819cf00573213d061a4a704f6bd2d75f6"
   license "MIT"
   head "https://github.com/a0s/claude-retrier.git", branch: "main"
 
@@ -31,12 +31,12 @@ class ClaudeRetrier < Formula
       If your Claude is not plain `claude` — a claude-work binary, an alias in
       your ~/.zshrc, a shell function — name it and the wrapper will run it:
 
-        claude-retrier --cr-cmd claude-work
-        claude-retrier --cr-cmd 'claude --model opus'
+        claude-retrier --cmd claude-work
+        claude-retrier --cmd 'claude --model opus'
 
       To make it the default, in your ~/.zshrc:
 
-        alias claude='claude-retrier --cr-cmd claude-work'
+        alias claude='claude-retrier --cmd claude-work'
 
       The log goes to ~/.claude-retrier/log; nothing else is written to $HOME.
     EOS
@@ -60,7 +60,7 @@ class ClaudeRetrier < Formula
       echo "started with: $*"
     SH
     chmod 0755, testpath/"claude-work"
-    out = shell_output("#{bin}/claude-retrier --cr-cmd #{testpath}/claude-work -p hello")
+    out = shell_output("#{bin}/claude-retrier --cmd #{testpath}/claude-work -p hello")
     assert_match "started with: -p hello", out
   end
 end
