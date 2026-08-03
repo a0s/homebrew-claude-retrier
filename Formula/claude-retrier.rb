@@ -1,8 +1,8 @@
 class ClaudeRetrier < Formula
   desc "Auto-resume Claude Code after a usage limit, on a pty, without tmux"
   homepage "https://github.com/a0s/claude-retrier"
-  url "https://github.com/a0s/claude-retrier/archive/refs/tags/v1.3.0.tar.gz"
-  sha256 "76232650ce760d3d60cb4a00c2b382924142b2976c20cf6548533bd583133259"
+  url "https://github.com/a0s/claude-retrier/archive/refs/tags/v1.4.0.tar.gz"
+  sha256 "a0dc27c292bd25560171ce2b0a0d7f594f681f83bf981683c38ba77c4fa82ede"
   license "MIT"
   head "https://github.com/a0s/claude-retrier.git", branch: "main"
 
