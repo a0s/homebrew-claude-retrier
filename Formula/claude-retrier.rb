@@ -1,8 +1,8 @@
 class ClaudeRetrier < Formula
-  desc "Auto-resume Claude Code after a usage limit, on a pty, without tmux"
+  desc "Resume Claude Code after a usage limit and restart it before it fills up"
   homepage "https://github.com/a0s/claude-retrier"
-  url "https://github.com/a0s/claude-retrier/archive/refs/tags/v1.6.0.tar.gz"
-  sha256 "8a4de51f2e730ada73ad666c208b3b736459814c793f30722c5872d59b71fb33"
+  url "https://github.com/a0s/claude-retrier/archive/refs/tags/v1.7.0.tar.gz"
+  sha256 "e85391826854e594b825710bcc8200dc51a85c2506df3e7edfa11f116e08fd29"
   license "MIT"
   head "https://github.com/a0s/claude-retrier.git", branch: "main"
 
@@ -37,6 +37,12 @@ class ClaudeRetrier < Formula
       To make it the default, in your ~/.zshrc:
 
         alias claude='claude-retrier --cmd claude-work'
+
+      It can also restart a session before it fills its context window: fold the
+      session into a file, verify the file, /clear, unfold. That one is off
+      until you ask for it:
+
+        CR_CONTEXT_PCT=51 claude-retrier
 
       The log goes to ~/.claude-retrier/log; nothing else is written to $HOME.
     EOS
