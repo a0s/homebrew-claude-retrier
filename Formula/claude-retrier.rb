@@ -1,8 +1,8 @@
 class ClaudeRetrier < Formula
-  desc "Resume Claude Code after a usage limit and restart it before it fills up"
+  desc "Keep a Claude Code or codex session going when it stops"
   homepage "https://github.com/a0s/claude-retrier"
-  url "https://github.com/a0s/claude-retrier/archive/refs/tags/v1.7.0.tar.gz"
-  sha256 "e85391826854e594b825710bcc8200dc51a85c2506df3e7edfa11f116e08fd29"
+  url "https://github.com/a0s/claude-retrier/archive/refs/tags/v1.8.0.tar.gz"
+  sha256 "c0b170800d25f405827381e710fdbe5d1f9a42cd34d3df481500a6bdccb0d925"
   license "MIT"
   head "https://github.com/a0s/claude-retrier.git", branch: "main"
 
@@ -37,6 +37,14 @@ class ClaudeRetrier < Formula
       To make it the default, in your ~/.zshrc:
 
         alias claude='claude-retrier --cmd claude-work'
+
+      codex is wrapped the same way, and naming it is all it takes:
+
+        claude-retrier --cmd codex
+
+      There it also answers a turn the server refused outright ("Selected model
+      is at capacity"), which states no reset time and, on a session running
+      agents, takes every one of them down with it.
 
       It can also restart a session before it fills its context window: fold the
       session into a file, verify the file, /clear, unfold. That one is off
