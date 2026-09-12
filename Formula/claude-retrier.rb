@@ -1,8 +1,8 @@
 class ClaudeRetrier < Formula
   desc "Keep a Claude Code or codex session going when it stops"
   homepage "https://github.com/a0s/claude-retrier"
-  url "https://github.com/a0s/claude-retrier/archive/refs/tags/v1.9.0.tar.gz"
-  sha256 "5eebeb33118028c6aefd277a749c861c13511d37b9a9622b065ce95c2ba50dc4"
+  url "https://github.com/a0s/claude-retrier/archive/refs/tags/v1.10.0.tar.gz"
+  sha256 "e8ecdbf3b4bee698f3082cd6cbd8e41f7d6853d1f6925441fdcf562f9db94ba5"
   license "MIT"
   head "https://github.com/a0s/claude-retrier.git", branch: "main"
 
