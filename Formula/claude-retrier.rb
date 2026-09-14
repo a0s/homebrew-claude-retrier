@@ -1,8 +1,8 @@
 class ClaudeRetrier < Formula
   desc "Keep a Claude Code or codex session going when it stops"
   homepage "https://github.com/a0s/claude-retrier"
-  url "https://github.com/a0s/claude-retrier/archive/refs/tags/v1.10.0.tar.gz"
-  sha256 "e8ecdbf3b4bee698f3082cd6cbd8e41f7d6853d1f6925441fdcf562f9db94ba5"
+  url "https://github.com/a0s/claude-retrier/archive/refs/tags/v1.11.0.tar.gz"
+  sha256 "2867705098b579741223a8e2b6d5298cd7a8098e4858e1c1394992ea3c0a4ba4"
   license "MIT"
   head "https://github.com/a0s/claude-retrier.git", branch: "main"
 
@@ -20,6 +20,11 @@ class ClaudeRetrier < Formula
               "CR_PYTHON_CANDIDATES:=#{formula_opt_bin("python@3.13")}/python3.13:python3:"
 
     bin.install "claude-retrier.sh" => "claude-retrier"
+    # The same file under the codex name: it reads the name it was called by and
+    # starts codex instead of claude. Installed whether or not codex is — without
+    # it, codex-retrier says so and exits 127, and installing codex later needs
+    # nothing reinstalled.
+    bin.install_symlink "claude-retrier" => "codex-retrier"
   end
 
   def caveats
@@ -38,9 +43,9 @@ class ClaudeRetrier < Formula
 
         alias claude='claude-retrier --cmd claude-work'
 
-      codex is wrapped the same way, and naming it is all it takes:
+      codex is wrapped the same way, under its own name:
 
-        claude-retrier --cmd codex
+        codex-retrier
 
       There it also answers a turn the server refused outright ("Selected model
       is at capacity"), which states no reset time and, on a session running
@@ -51,6 +56,9 @@ class ClaudeRetrier < Formula
       until you ask for it:
 
         CR_CONTEXT_PCT=51 claude-retrier
+        CR_CODEX_CONTEXT_PCT=80 codex-retrier
+
+      On codex it also keeps codex's own compaction from getting there first.
 
       The log goes to ~/.claude-retrier/log; nothing else is written to $HOME.
     EOS
@@ -76,5 +84,14 @@ class ClaudeRetrier < Formula
     chmod 0755, testpath/"claude-work"
     out = shell_output("#{bin}/claude-retrier --cmd #{testpath}/claude-work -p hello")
     assert_match "started with: -p hello", out
+
+    # codex-retrier is the same file, and the name alone makes codex the default.
+    (testpath/"bin/codex").write <<~SH
+      #!/bin/sh
+      echo "codex started with: $*"
+    SH
+    chmod 0755, testpath/"bin/codex"
+    out = shell_output("PATH=#{testpath}/bin:$PATH #{bin}/codex-retrier exec hello")
+    assert_match "codex started with: exec hello", out
   end
 end
