@@ -1,8 +1,8 @@
 class ClaudeRetrier < Formula
   desc "Keep a Claude Code or codex session going when it stops"
   homepage "https://github.com/a0s/claude-retrier"
-  url "https://github.com/a0s/claude-retrier/archive/refs/tags/v1.12.0.tar.gz"
-  sha256 "49b7c1f3ce54c284e829ddba180f973fc2e2207de448be4dbf398b12801027cf"
+  url "https://github.com/a0s/claude-retrier/archive/refs/tags/v2.0.0.tar.gz"
+  sha256 "d9cbcf01c77ed0b1f8aa8e35693340b54bfb880e66da59a7ceee23ef80a00f82"
   license "MIT"
   head "https://github.com/a0s/claude-retrier.git", branch: "main"
 
@@ -55,8 +55,8 @@ class ClaudeRetrier < Formula
       session into a file, verify the file, /clear, unfold. That one is off
       until you ask for it:
 
-        CR_CONTEXT_PCT=51 claude-retrier
-        CR_CODEX_CONTEXT_PCT=80 codex-retrier
+        CR_CONTEXT_RESTART=1 claude-retrier
+        CR_CONTEXT_RESTART=1 codex-retrier
 
       On codex it also keeps codex's own compaction from getting there first.
 
